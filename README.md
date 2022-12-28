@@ -1,0 +1,2 @@
+# ZSI
+ Zastosowania Sztucznej Inteligencji

@@ -1,33 +1,27 @@
 import random
-from enum import Enum, auto
 
 
-class Selection(Enum):
-    TOURNAMENT = auto()
-    PROPORTIONAL = auto()
+def get_best_score_index(scores, indexes):
+    selected_scores = [scores[i] for i in indexes]
+    best_score = min(selected_scores)
+    return indexes[selected_scores.index(best_score)]
 
 
-def best_index(marks, indexes):
-    t = [marks[i] for i in indexes]
-    min_mark = min(t)
-    min_index = indexes[t.index(min_mark)]
-    return min_index
+def tournament_selection(population, scores, k=3):
+    new_population = []
+    for i in range(len(population)):
+        indexes = random.sample(range(len(population)), k)
+        best = get_best_score_index(scores, indexes)
+        new_population.append(population[best])
+    return new_population
 
 
-def tournament_selection(population, marks, k=3):
-    return [population[
-                best_index(marks, random.sample(range(len(population)), k))
-            ] for _ in population]
+def probability_selection(population, scores):
+    scores_reversed = [max(scores) + 1 - score for score in scores]
+    return random.choices(population, scores_reversed, k=len(population))
 
 
-# Selekcja koła ruletki
-def probability_selection(population, marks):
-    return random.choices(population, weights=[
-        max(marks) + 1 - mark for mark in marks
-    ], k=len(population))
-
-
-def selection(selection: Selection, population: list, marks: list, k: int = 3):
-    return tournament_selection(population, marks, k) if \
-        selection == Selection.TOURNAMENT else probability_selection(population,
-                                                                     marks)
+def selection(selection_type, population: list, scores: list, k: int = 3):
+    return tournament_selection(population, scores, k) if \
+        selection_type == "T" else probability_selection(population,
+                                                         scores)

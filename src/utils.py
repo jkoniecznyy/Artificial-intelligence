@@ -1,6 +1,5 @@
 import csv
 import random
-from typing import Tuple, Any, List
 
 
 def read_distances_from_file(path: str, delimiter=" "):
@@ -43,3 +42,16 @@ def get_best_score(distance_table, population):
     # print(f"Scores: {scores}")
     # print(f"Best solution: {scores.index(best_score)} with score {best_score}\n {best_solution}")
     return best_score, best_solution, scores
+
+
+def get_best_score_index(scores, indexes):
+    selected_scores = [scores[i] for i in indexes]
+    best_score = min(selected_scores)
+    return indexes[selected_scores.index(best_score)]
+
+
+def get_slice_indexes(solution, slices=2):
+    x1, x2 = random.sample(range(len(solution)), slices)
+    if x1 > x2:
+        x1, x2 = x2, x1
+    return [x1, x2]

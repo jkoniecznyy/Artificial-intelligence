@@ -1,31 +1,31 @@
 import random
-from enum import Enum, auto
+from src.utils import get_slice_indexes
+from src.types import Mutation
 
 
-class Mutation(Enum):
-    REPLACEMENT = auto()
-    INVERSION = auto()
-
-
-def mutate_replace(solution: list, mutation_rate: float = 0.01):
+def mutate_replace(solution: list):
     for i in range(len(solution)):
-        if random.random() <= mutation_rate:
-            j = random.randrange(len(solution))
-            solution[i], solution[j] = solution[j], solution[i]
+        j = random.randrange(len(solution))
+        solution[i], solution[j] = solution[j], solution[i]
+    return solution
 
 
-def mutate_inversion(solution: list, mutation_rate: float = 0.01):
-    if random.random() <= mutation_rate:
-        [i, j] = random.sample(range(len(solution)), 2)
-
-        if i > j:
-            i, j = j, i
-
-        solution[i:j] = solution[i:j][::-1]
+def mutate_inversion(solution: list):
+    [x1, x2] = get_slice_indexes(solution)
+    solution[x1:x2] = solution[x1:x2][::-1]
+    return solution
 
 
-def mutate(population, mutation: Mutation, mutation_rate: float = 0.05):
+def mutate(population, mutation_type: Mutation, mutation_rate: float = 0.02):
+    new_population = []
     for solution in population:
-        mutate_inversion(solution,
-                         mutation_rate) if mutation == Mutation.INVERSION \
-            else mutate_replace(solution, mutation_rate)
+        if random.random() > mutation_rate:
+            new_population.append(solution)
+        else:
+            # print(f'Before mutation: {solution}')
+            if mutation_type == Mutation.INVERSION:
+                new_population.append(mutate_inversion(solution))
+            else:
+                new_population.append(mutate_replace(solution))
+            # print(f'After mutation: {new_population[-1]}')
+    return new_population

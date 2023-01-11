@@ -1,61 +1,56 @@
-import random
-from enum import Enum, auto
+from src.utils import get_slice_indexes
+from src.types import Crossover
 
 
-class Crossover(Enum):
-    PMX = auto()
-    CX = auto()
-    OX = auto()
+def crossing_pmx(solution0, solution1):
+    pass
+#     [x1, x2] = get_slice_indexes(solution0)
+#     left = solution0[:x1], solution1[:x1]
+#     middle = solution0[x1:x2], solution1[x1:x2]
+#     right = solution0[x2:], solution1[x2:]
+#     print(f'solution1: {solution0}, x1: {x1}, x2: {x2}\nsolution2: {solution1}, ')
+#     print(f'left: {left}, middle: {middle}, right: {right}')
+#     # Insert middle parts
+#     new_solution0 = [[None] * x1, middle[0], [None] * (len(solution0) - x2)]
+#     new_solution1 = [[None] * x1, middle[1], [None] * (len(solution1) - x2)]
+#     # Insert beginnings
+#     for i in range(x1):
+#         if left[0][i] not in middle[1]:
+#             new_solution0[0][i] = left[1][i]
+#         if left[1][i] not in middle[0]:
+#             new_solution1[0][i] = left[0][i]
+#     print(f'solution1: {solution0}, new_solution0: {new_solution0}')
+#     print(f'solution2: {solution1}, new_solution1: {new_solution1}')
+#     return new_solution0, new_solution1
 
 
-def crossing_pmx(p1, p2):
-    [x1, x2] = random.sample(range(len(p1)), 2)
-    if x1 > x2:
-        x1, x2 = x2, x1
+def crossing_ox(solution0, solution1):
+    [x1, x2] = get_slice_indexes(solution0)
+    left = solution0[:x1], solution1[:x1]
+    middle = solution0[x1:x2], solution1[x1:x2]
+    right = solution0[x2:], solution1[x2:]
+    print(f'solution1: {solution0}, x1: {x1}, x2: {x2}\nsolution2: {solution1}, ')
+    print(f'right: {right}, left: {left}, middle: {middle}, ')
+    # Insert middle parts
+    new_solution0 = [[None] * x1, middle[0], [None] * (len(solution0) - x2)]
+    new_solution1 = [[None] * x1, middle[1], [None] * (len(solution1) - x2)]
+    print(f'new_solution0: {new_solution0}')
+    print(f'new_solution1: {new_solution1}')
 
-    c2 = [i for i in p1]
-    c1 = [i for i in p2]
+    starting_index = x2 + 1
+    for i in range(len(solution0)):
+        if starting_index >= len(solution0):
+            starting_index = 0
 
-    _map1 = {}
-    _map2 = {}
+        print(f'solution1[starting_index]: {solution1[starting_index]}')
+        print(f'not in new_solution0: {solution1[starting_index] not in new_solution0}')
+        # while solution1[starting_index] not in new_solution0:
+        #     print()
+        starting_index += 1
 
-    for i in range(x1, x2):
-        c2[i] = p2[i]
-        _map1[p2[i]] = p1[i]
-        c1[i] = p1[i]
-        _map2[p1[i]] = p2[i]
-
-    for i in list(range(x1)) + list(range(x2, len(p1))):
-        while c2[i] in _map1:
-            c2[i] = _map1[c2[i]]
-
-        while c1[i] in _map2:
-            c1[i] = _map2[c1[i]]
-
-    return c1, c2
-
-
-def crossing_ox(p1, p2):
-    [x1, x2] = random.sample(range(len(p1)), 2)
-    if x1 > x2:
-        x1, x2 = x2, x1
-
-    c1 = [-9999999 for _ in p1]
-    c2 = [-9999999 for _ in p2]
-
-    for i in range(x1, x2):
-        c1[i] = p1[i]
-        c2[i] = p2[i]
-
-    c1_i = [i for i in list(range(len(p1))) if i not in list(range(x1, x2))]
-    c2_i = [i for i in list(range(len(p1))) if i not in list(range(x1, x2))]
-    for i in list(range(x2, len(p1))) + list(range(x2)):
-        if p2[i] not in c1:
-            c1[c1_i.pop(0)] = p2[i]
-        if p1[i] not in c2:
-            c2[c2_i.pop(0)] = p1[i]
-
-    return c1, c2
+    # print(f'solution1: {solution0}, new_solution0: {new_solution0}')
+    # print(f'solution2: {solution1}, new_solution1: {new_solution1}')
+    return new_solution0, new_solution1
 
 
 def crossing_cx(p1: list, p2: list):
@@ -96,20 +91,18 @@ def crossing_cx(p1: list, p2: list):
     return c1, c2
 
 
-def crossover(population: list, alg: Crossover,
+def crossover(population: list, crossover_type: Crossover,
               pk: float = 0.95) -> list:
     new_population = []
     for i in range(0, len(population), 2):
-        new_1, new_2 = population[i][:], population[i + 1][:]
-        if random.random() < pk and new_1 != new_2:
-            new_1, new_2 = crossing_ox(
-                population[i],
-                population[i + 1]) if alg == Crossover.OX else \
-                crossing_cx(
-                    population[i],
-                    population[i + 1]) if alg == Crossover.CX else \
-                    crossing_pmx(population[i],
-                                 population[i + 1])
-        new_population.extend([new_1, new_2])
-
+        gen1, gen2 = population[i][:], population[i + 1][:]
+        if gen1 != gen2:
+            match crossover_type:
+                case Crossover.PMX:
+                    gen1, gen2 = crossing_pmx(population[i], population[i + 1])
+                case Crossover.CX:
+                    gen1, gen2 = crossing_cx(population[i], population[i + 1])
+                case Crossover.OX:
+                    gen1, gen2 = crossing_ox(population[i], population[i + 1])
+        new_population.extend([gen1, gen2])
     return new_population

@@ -4,9 +4,9 @@ from src.types import Crossover, Mutation, Selection
 if __name__ == '__main__':
     # CONFIGURATION
     FILE_PATH = "data/berlin52.txt"
-    POPULATION_SIZE = 200
-    GENERATIONS_AMOUNT = 200
-    STEP_SIZE = 10
+    POPULATION_SIZE = 400
+    GENERATIONS_AMOUNT = 400
+    STEP_SIZE = 2
     # SELECTION
     SELECTION_TYPE = Selection.TOURNAMENT
     SELECTION_PRESSURE = 5
@@ -15,12 +15,14 @@ if __name__ == '__main__':
     CROSSOVER_PROB = 0.5
     # MUTATION
     MUTATION_TYPE = Mutation.INVERSION
-    MUTATION_RATE = 0.05
+    MUTATION_RATE = 0.3
 
-    best_score, best_solution, results = run_algorithm(
-        FILE_PATH, POPULATION_SIZE, GENERATIONS_AMOUNT,
-        STEP_SIZE, SELECTION_TYPE, SELECTION_PRESSURE, CROSSOVER_TYPE,
-        CROSSOVER_PROB, MUTATION_TYPE, MUTATION_RATE)
+    for i in range(2):
+        best_score, best_solution = run_algorithm(
+            FILE_PATH, POPULATION_SIZE, GENERATIONS_AMOUNT,
+            STEP_SIZE, SELECTION_TYPE, SELECTION_PRESSURE, CROSSOVER_TYPE,
+            CROSSOVER_PROB, MUTATION_TYPE, MUTATION_RATE)
 
-    print(f'Best score: {best_score}, best solution: {best_solution}')
-
+        # print(f'Best score: {best_score}, best solution: {best_solution}')
+        print(f'Final score: {best_score}')
+        print("-".join([str(i) for i in best_solution]))

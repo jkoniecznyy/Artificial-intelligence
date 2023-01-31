@@ -16,21 +16,12 @@ def run_algorithm(file_path: str, population_size: int,
     distance_list = create_distance_list(distances)
     population = initialize_population(len(distance_list), population_size)
     best_score, best_solution, scores = get_best_score(distance_list, population)
-    print(f'Initial best score: {best_score}')
-    results = []
-    step = generations_amount / step_size
+    step = round(generations_amount / step_size)
+
     for i in range(generations_amount):
-        # print(f"Population {population}")
         generation = selection(selection_type, population, scores, selection_size)
-        # print(f"Generation {generation}")
         generation = crossover(generation, crossover_type, crossover_prob)
-
         generation = mutate(generation, mutation_type, mutation_rate)
-
-        if i % 3 == 0:
-            generation = mutate(generation, Mutation.REPLACEMENT, mutation_rate)
-        else:
-            generation = mutate(generation, Mutation.INVERSION, mutation_rate)
 
         best_score_generation, best_solution_generation, scores = get_best_score(distance_list, generation)
 
@@ -41,7 +32,6 @@ def run_algorithm(file_path: str, population_size: int,
         population = generation
 
         if i % step == 0:
-            print(f'{round(i / step)}/{step_size}, best score: {best_score}')
-            results.append([i, best_score, best_solution])
+            print(f'{round(100*i / generations_amount)}% done, best score: {best_score}')
 
-    return best_score, best_solution, results
+    return best_score, best_solution

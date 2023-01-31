@@ -2,27 +2,6 @@ from src.utils import get_slice_indexes
 from src.types import Crossover
 
 
-def crossing_pmx(solution0, solution1):
-    pass
-#     [x1, x2] = get_slice_indexes(solution0)
-#     left = solution0[:x1], solution1[:x1]
-#     middle = solution0[x1:x2], solution1[x1:x2]
-#     right = solution0[x2:], solution1[x2:]
-#     print(f'solution1: {solution0}, x1: {x1}, x2: {x2}\nsolution2: {solution1}, ')
-#     print(f'left: {left}, middle: {middle}, right: {right}')
-#     # Insert middle parts
-#     new_solution0 = [[None] * x1, middle[0], [None] * (len(solution0) - x2)]
-#     new_solution1 = [[None] * x1, middle[1], [None] * (len(solution1) - x2)]
-#     # Insert beginnings
-#     for i in range(x1):
-#         if left[0][i] not in middle[1]:
-#             new_solution0[0][i] = left[1][i]
-#         if left[1][i] not in middle[0]:
-#             new_solution1[0][i] = left[0][i]
-#     print(f'solution1: {solution0}, new_solution0: {new_solution0}')
-#     print(f'solution2: {solution1}, new_solution1: {new_solution1}')
-#     return new_solution0, new_solution1
-
 
 def crossing_ox(solution0, solution1):
     [x1, x2] = get_slice_indexes(solution0)
@@ -98,8 +77,8 @@ def crossover(population: list, crossover_type: Crossover,
         gen1, gen2 = population[i][:], population[i + 1][:]
         if gen1 != gen2:
             match crossover_type:
-                case Crossover.PMX:
-                    gen1, gen2 = crossing_pmx(population[i], population[i + 1])
+                # case Crossover.PMX:
+                #     gen1, gen2 = crossing_pmx(population[i], population[i + 1])
                 case Crossover.CX:
                     gen1, gen2 = crossing_cx(population[i], population[i + 1])
                 case Crossover.OX:

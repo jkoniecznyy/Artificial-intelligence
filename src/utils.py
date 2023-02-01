@@ -50,8 +50,8 @@ def get_best_score_index(scores, indexes):
     return indexes[selected_scores.index(best_score)]
 
 
-def get_slice_indexes(solution):
-    index_1, index_2 = random.sample(range(len(solution)), 2)
+def get_slice_indexes(length):
+    index_1, index_2 = random.sample(range(length), 2)
     if index_1 > index_2:
         index_1, index_2 = index_2, index_1
     return [index_1, index_2]

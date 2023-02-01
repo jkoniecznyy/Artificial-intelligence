@@ -1,5 +1,5 @@
 from src.tsp import run_algorithm
-from src.types import Crossover, Mutation, Selection
+from src.types import Mutation, Selection
 
 if __name__ == '__main__':
     # CONFIGURATION
@@ -11,7 +11,6 @@ if __name__ == '__main__':
     SELECTION_TYPE = Selection.TOURNAMENT
     SELECTION_PRESSURE = 5
     # CROSSOVER
-    CROSSOVER_TYPE = Crossover.CX
     CROSSOVER_PROB = 0.5
     # MUTATION
     MUTATION_TYPE = Mutation.INVERSION

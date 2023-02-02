@@ -1,27 +1,32 @@
-from src.tsp import run_algorithm
+from src.tsp import generic_algorithm
 from src.types import Mutation, Selection
+import time
 
 if __name__ == '__main__':
     # CONFIGURATION
     FILE_PATH = "data/berlin52.txt"
-    POPULATION_SIZE = 400
-    GENERATIONS_AMOUNT = 400
-    STEP_SIZE = 2
+    POPULATION_SIZE = 500
+    GENERATIONS_AMOUNT = 1000
+    LAUNCHES = 1
+    STEPS = 5
     # SELECTION
     SELECTION_TYPE = Selection.TOURNAMENT
-    SELECTION_PRESSURE = 5
+    SELECTION_SIZE = 3
     # CROSSOVER
-    CROSSOVER_PROB = 0.5
+    CROSSOVER_PROB = 0.75
     # MUTATION
     MUTATION_TYPE = Mutation.INVERSION
-    MUTATION_RATE = 0.3
+    MUTATION_PROB = 0.05
 
-    for i in range(2):
-        best_score, best_solution = run_algorithm(
+    for i in range(LAUNCHES):
+        start = time.time()
+
+        best_score, best_solution = generic_algorithm(
             FILE_PATH, POPULATION_SIZE, GENERATIONS_AMOUNT,
-            STEP_SIZE, SELECTION_TYPE, SELECTION_PRESSURE, CROSSOVER_TYPE,
-            CROSSOVER_PROB, MUTATION_TYPE, MUTATION_RATE)
+            STEPS, SELECTION_TYPE, SELECTION_SIZE,
+            CROSSOVER_PROB, MUTATION_TYPE, MUTATION_PROB)
 
-        # print(f'Best score: {best_score}, best solution: {best_solution}')
-        print(f'Final score: {best_score}')
-        print("-".join([str(i) for i in best_solution]))
+        print(f'\nFinal score: {best_score}')
+        print(f'Time: {round(time.time() - start, 2)} sec')
+        print('Solution:')
+        print('-'.join([str(i) for i in best_solution]))

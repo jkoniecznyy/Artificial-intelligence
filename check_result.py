@@ -6,7 +6,7 @@ from math import sqrt
 
 
 # Wywołania: "python check_result.py nazwa_pliku_macierzy nazwa_pliku_z_wynikiem"
-# "python check_result.py data.berlin52.txt results.txt"
+# "python check_result.py data.r_berlin52.txt r_a280.txt"
 def zbudujMacierz(wiersze):
     macierz = [[0 for col in range(int(wiersze[0]))] for row in range(int(wiersze[0]))]
     i = 0
@@ -40,7 +40,8 @@ nPlikuWynikow = sys.argv[2]
 plikWe = open(nPliku, 'r')  # Otwarcie pliku wejściowego
 plikWe2 = open(nPlikuWynikow, 'r')  # Otwarcie pliku wejściowego wyników
 
-plikWy = open('check_' + nPliku.split('.')[0] + '.txt',
+# plikWy = open('verification_data/' + nPliku.split('.')[0] + '.txt',
+plikWy = open('results_verification/v_berlin52.txt',
               'w')  # Stworzenie nowego pliku (wyjściowego) o tej samej nazwie, co wejściowy, ale z rozszerzeniem .txt
 
 wiersze = plikWe.readlines()
@@ -72,9 +73,9 @@ for w in wyniki:
         #        if odleglosc<minimum:
         #            minimum=odleglosc
         wynik = "%i %i %s %s" % (
-        odleglosc, int(w[1]), "Odległość: " + str(odleglosc == int(w[1])), "Trasa: " + str(flaga))
+        odleglosc, int(w[1]), "Odleglosc: " + str(odleglosc == int(w[1])), "Trasa: " + str(flaga))
     else:
-        wynik = "Pominięto: %s" % w
+        wynik = "Pominieto: %s" % w
     print(wynik)
     plikWy.write(wynik + '\n')
 

@@ -2,6 +2,4 @@
 src/__pycache__/
 test/__pycache__/
 venv/
-extras/
-spr_data/
-oblicz.py
+check_result.py

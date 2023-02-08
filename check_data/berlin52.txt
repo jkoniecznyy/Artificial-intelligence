@@ -1,7 +1,0 @@
-10639 10639 Odleg³oœæ: True Trasa: True
-9018 8183 Odleg³oœæ: False Trasa: True
-Pominiêto: ['']
-10615 8250 Odleg³oœæ: False Trasa: True
-8320 7908 Odleg³oœæ: False Trasa: True
-11191 8729 Odleg³oœæ: False Trasa: True
-8805 8338 Odleg³oœæ: False Trasa: True

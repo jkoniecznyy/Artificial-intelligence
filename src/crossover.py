@@ -2,7 +2,7 @@ import random
 from src.utils import get_slice_indexes
 
 
-def crossing_pmx(solution_1: list, solution_2: list, index_1: int, index_2: int) -> list:
+def pmx_crossover(solution_1: list, solution_2: list, index_1: int, index_2: int) -> list:
     """ Does the Partially Mapped Crossover PMX on the first provided solution """
     result = [i for i in solution_2]
     map = {}
@@ -29,8 +29,8 @@ def crossover(population: list, crossover_prob: float, slice_1: int = None, slic
             if slice_1 is None or slice_2 is None:
                 [slice_1, slice_2] = get_slice_indexes(solution_length)
 
-            solution_1 = crossing_pmx(population[i], population[i + 1], slice_1, slice_2)
-            solution_2 = crossing_pmx(population[i + 1], population[i], slice_1, slice_2)
+            solution_1 = pmx_crossover(population[i], population[i + 1], slice_1, slice_2)
+            solution_2 = pmx_crossover(population[i + 1], population[i], slice_1, slice_2)
             new_population.extend([solution_1, solution_2])
 
         else:

@@ -2,11 +2,11 @@ import csv
 import random
 
 
-def read_distances_from_file(path: str, delimiter=" ") -> list:
+def read_distances_from_file(path: str) -> list:
     """ Reads the intercity distances from the file """
     with open(path, newline="") as distances:
         next(distances)
-        return [list(filter(None, row)) for row in csv.reader(distances, delimiter=delimiter)]
+        return [list(filter(None, row)) for row in csv.reader(distances, delimiter=" ")]
 
 
 def create_distance_list(data: list[list[int]]) -> list:
@@ -39,7 +39,7 @@ def get_best_score(distance_table: list, population: list) -> tuple[int, list, l
         solution_score = 0
         for i in range(len(solution) - 1):
             solution_score += distance_table[solution[i]][solution[i + 1]]
-        solution_score += distance_table[solution[-1]][solution[0]]
+        solution_score += distance_table[solution[len(solution) - 1]][solution[0]]
         scores.append(solution_score)
     best_score = min(scores)
     best_solution = population[scores.index(best_score)]

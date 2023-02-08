@@ -4,11 +4,11 @@ import time
 
 if __name__ == '__main__':
     # CONFIGURATION
-    FILE_PATH = "data/berlin52.txt"
-    POPULATION_SIZE = 500
-    GENERATIONS_AMOUNT = 1000
+    FILE_PATH = "data/a280.txt"
+    POPULATION_SIZE = 200
+    GENERATIONS_AMOUNT = 200
     LAUNCHES = 1
-    STEPS = 5
+    STEPS = 10
     # SELECTION
     SELECTION_TYPE = Selection.TOURNAMENT
     SELECTION_SIZE = 3
@@ -29,4 +29,4 @@ if __name__ == '__main__':
         print(f'\nFinal score: {best_score}')
         print(f'Time: {round(time.time() - start, 2)} sec')
         print('Solution:')
-        print('-'.join([str(i) for i in best_solution]))
+        print('-'.join([str(i) for i in best_solution]) + ' ' + str(best_score))

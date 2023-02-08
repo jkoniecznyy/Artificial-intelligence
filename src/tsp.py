@@ -1,7 +1,7 @@
 from src.utils import read_distances_from_file, create_distance_list, initialize_population, get_best_score
 from src.selection import selection
 from src.crossover import crossover
-from src.mutation import mutate
+from src.mutation import mutation
 from src.types import Mutation, Selection
 
 
@@ -20,7 +20,7 @@ def generic_algorithm(file_path: str, population_size: int, generations_amount: 
     for i in range(generations_amount):
         generation = selection(selection_type, population, scores, selection_size)
         generation = crossover(generation, crossover_prob)
-        generation = mutate(mutation_type, generation, mutation_prob)
+        generation = mutation(mutation_type, generation, mutation_prob)
 
         best_score_generation, best_solution_generation, scores = get_best_score(distance_list, generation)
 

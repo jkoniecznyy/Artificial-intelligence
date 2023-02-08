@@ -36,21 +36,19 @@ def get_best_score(distance_table: list, population: list) -> tuple[int, list, l
     """ Returns best score, best solution and all scores from the population """
     scores = []
     for solution in population:
-        solution_score = 0
-        for i in range(len(solution) - 1):
-            solution_score += distance_table[solution[i]][solution[i + 1]]
-        solution_score += distance_table[solution[len(solution) - 1]][solution[0]]
-        scores.append(solution_score)
+        scores.append(calculate_score(distance_table, solution))
     best_score = min(scores)
     best_solution = population[scores.index(best_score)]
     return best_score, best_solution, scores
 
 
-def get_best_score_index(scores: list, indexes: list) -> int:
-    """ Returns the index of the best score """
-    selected_scores = [scores[i] for i in indexes]
-    best_score = min(selected_scores)
-    return indexes[selected_scores.index(best_score)]
+def calculate_score(distance_table: list, solution: list) -> int:
+    """ Returns the score of a solution """
+    solution_score = 0
+    for i in range(len(solution) - 1):
+        solution_score += distance_table[solution[i]][solution[i + 1]]
+    solution_score += distance_table[solution[len(solution) - 1]][solution[0]]
+    return solution_score
 
 
 def get_slice_indexes(length: int) -> list[int, int]:

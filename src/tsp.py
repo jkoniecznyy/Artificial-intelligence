@@ -11,11 +11,12 @@ def generic_algorithm(file_path: str, population_size: int, generations_amount: 
     """     Runs the generic algorithm for the Traveling Salesman Problem.    """
     distance_list = create_distance_list(read_distances_from_file(file_path))
     population = initialize_population(len(distance_list), population_size)
-    best_score, best_solution, scores = get_best_score(distance_list, population)
+    best_score, best_solution, scores_pop = get_best_score(distance_list, population)
 
     step = round(generations_amount / steps)
     crossover_decrease = crossover_prob / steps
     mutation_decrease = mutation_prob / steps
+    scores = scores_pop
 
     for i in range(generations_amount):
         generation = selection(selection_type, population, scores, selection_size)

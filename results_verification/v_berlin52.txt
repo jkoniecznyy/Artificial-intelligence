@@ -2,4 +2,5 @@
 9095 9095 Odleglosc: True Trasa: True
 8570 8570 Odleglosc: True Trasa: True
 8723 8723 Odleglosc: True Trasa: True
+
 8419 8419 Odleglosc: True Trasa: True

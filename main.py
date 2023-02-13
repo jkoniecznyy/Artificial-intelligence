@@ -5,16 +5,16 @@ import time
 
 if __name__ == '__main__':
     # CONFIGURATION
-    FILE_PATH = "data/berlin52.txt"
+    FILE_PATH = "data/competition/gr120.txt"
     POPULATION_SIZE = 500
     GENERATIONS_AMOUNT = 2000
-    LAUNCHES = 2
+    LAUNCHES = 5
     STEPS = 5
     # SELECTION
     SELECTION_TYPE = Selection.TOURNAMENT
     SELECTION_SIZE = 3
     # CROSSOVER
-    CROSSOVER_PROB = 0.65
+    CROSSOVER_PROB = 0.75
     # MUTATION
     MUTATION_TYPE = Mutation.INVERSION
     MUTATION_PROB = 0.1

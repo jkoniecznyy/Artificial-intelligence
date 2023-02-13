@@ -1,0 +1,6 @@
+9914 9914 Odleglosc: True Trasa: True
+10801 10801 Odleglosc: True Trasa: True
+9186 9186 Odleglosc: True Trasa: True
+9830 9830 Odleglosc: True Trasa: True
+
+9090 9090 Odleglosc: True Trasa: True

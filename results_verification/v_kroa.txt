@@ -1,0 +1,6 @@
+28244 28244 Odleglosc: True Trasa: True
+25508 25508 Odleglosc: True Trasa: True
+30095 30095 Odleglosc: True Trasa: True
+26982 26982 Odleglosc: True Trasa: True
+
+25263 25263 Odleglosc: True Trasa: True

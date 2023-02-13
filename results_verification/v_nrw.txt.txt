@@ -1,0 +1,7 @@
+633103 633103 Odleglosc: True Trasa: True
+619694 619694 Odleglosc: True Trasa: True
+622010 622010 Odleglosc: True Trasa: True
+617217 617217 Odleglosc: True Trasa: True
+Pominieto: ['']
+607336 607336 Odleglosc: True Trasa: True
+Pominieto: ['Time:', '331.18', 'sec']

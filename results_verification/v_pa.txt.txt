@@ -1,0 +1,7 @@
+12616 12616 Odleglosc: True Trasa: True
+12439 12439 Odleglosc: True Trasa: True
+12764 12764 Odleglosc: True Trasa: True
+12544 12544 Odleglosc: True Trasa: True
+Pominieto: ['']
+12253 12253 Odleglosc: True Trasa: True
+Pominieto: ['Time:', '121.58', 'sec']

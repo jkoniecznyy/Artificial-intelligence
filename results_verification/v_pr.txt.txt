@@ -1,0 +1,6 @@
+92528 92528 Odleglosc: True Trasa: True
+72660 72660 Odleglosc: True Trasa: True
+61951 61951 Odleglosc: True Trasa: True
+77775 77775 Odleglosc: True Trasa: True
+
+51263 51263 Odleglosc: True Trasa: True

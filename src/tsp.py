@@ -14,7 +14,7 @@ def generic_algorithm(file_path: str, population_size: int, generations_amount: 
     best_score_population, best_solution_population, scores_population = get_best_score(distance_list, population)
 
     step = round(generations_amount / steps)
-    crossover_decrease = crossover_prob / steps
+    crossover_decrease = (crossover_prob - 0.4) / steps
     mutation_decrease = mutation_prob / steps
 
     for i in range(generations_amount):

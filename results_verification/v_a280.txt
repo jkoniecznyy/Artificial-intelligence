@@ -1,0 +1,6 @@
+9718 9718 Odleglosc: True Trasa: True
+8012 8012 Odleglosc: True Trasa: True
+7261 7261 Odleglosc: True Trasa: True
+7340 7340 Odleglosc: True Trasa: True
+
+7239 7239 Odleglosc: True Trasa: True

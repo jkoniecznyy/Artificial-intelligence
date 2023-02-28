@@ -2,6 +2,13 @@ import random
 from src.types import Selection
 
 
+def get_best_score_index(scores: list, indexes: list) -> int:
+    """ Returns the index of the best score """
+    selected_scores = [scores[i] for i in indexes]
+    best_score = min(selected_scores)
+    return indexes[selected_scores.index(best_score)]
+
+
 def tournament_selection(population: list, scores: list, selection_pressure: int) -> list:
     """ Selects the best individuals using tournament selection. """
     new_population = []
@@ -10,13 +17,6 @@ def tournament_selection(population: list, scores: list, selection_pressure: int
         best = get_best_score_index(scores, indexes)
         new_population.append(population[best])
     return new_population
-
-
-def get_best_score_index(scores: list, indexes: list) -> int:
-    """ Returns the index of the best score """
-    selected_scores = [scores[i] for i in indexes]
-    best_score = min(selected_scores)
-    return indexes[selected_scores.index(best_score)]
 
 
 def probability_selection(population: list, scores: list) -> list:
